@@ -14,6 +14,25 @@
             Duration D4 = new Duration(666);
             Console.WriteLine(D4);
             #endregion
+            Console.WriteLine("_____________________________");
+
+
+            #region Q3
+            //D3 =D1 + D2;
+            //D3 = D1 + 7800;
+            //D3 = 666 + D3;
+            //D3 = ++D1;
+            //D3 = --D2;
+            // Console.WriteLine(D3);
+            //D1 = D1 - D2;
+            //Console.WriteLine(D1);
+            if (D1 > D2) { Console.WriteLine("D1 > D2"); }
+            else if (D1 < D2) { Console.WriteLine("D1<D2"); }
+            else
+            {
+                Console.WriteLine("D1=D2");
+            }
+            #endregion
         }
     }
 }

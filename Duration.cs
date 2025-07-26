@@ -17,32 +17,83 @@ namespace AssignmentOOP_4
             Hours = hours; Minutes = minutes; Seconds = seconds;
             output = $"Hours : {Hours} , Minutes : {Minutes} , Seconds : {Seconds}";
         }
+        public Duration() { }
         public Duration(int NUM)
         {
-            if (NUM / 3600 >= 1)
-            {
-                Hours = NUM / 3600;
-                if (Hours % 60 >= 1)
-                {
-                    Minutes = (NUM - (Hours * 3600)) / 60;
-                    Seconds = ((NUM - (Hours * 3600) - (Minutes * 60))) % 60;
-                    output = $"Hours : {Hours} , Minutes : {Minutes} , Seconds : {Seconds}";
-                }
-            }
-            else
-            {
-                if (NUM % 60 >= 1)
-                {
-                    Minutes = (NUM ) / 60;
-                    Seconds = ((NUM - (Minutes * 60))) % 60;
-                    output = $"Minutes : {Minutes} , Seconds : {Seconds}";
-                }
+            Hours = NUM / 3600;
+            Minutes = (NUM % 3600) / 60;
+            Seconds = NUM % 60;
 
-            }
+            if (Hours > 0)
+                output = $"Hours : {Hours} , Minutes : {Minutes} , Seconds : {Seconds}";
+            else if (Minutes > 0)
+                output = $"Minutes : {Minutes} , Seconds : {Seconds}";
+            else
+                output = $"Seconds : {Seconds}";
+
         }
-        public override string ToString() 
+        public override string ToString()
         {
             return output;
+        }
+        public static Duration operator +(Duration a, Duration b)
+        {
+            int totalSeconds = a.Hours * 3600 + a.Minutes * 60 + a.Seconds
+                      + b.Hours * 3600 + b.Minutes * 60 + b.Seconds;
+
+            return new Duration(totalSeconds);
+
+
+        }
+        public static Duration operator +(Duration a, int NUM)
+        {
+            int totalSeconds = a.Hours * 3600 + a.Minutes * 60 + a.Seconds + NUM;
+
+            return new Duration(totalSeconds);
+        }
+
+        public static Duration operator +(int NUM, Duration a)
+        {
+            int totalSeconds = a.Hours * 3600 + a.Minutes * 60 + a.Seconds + NUM;
+
+            return new Duration(totalSeconds);
+
+        }
+        public static Duration operator ++(Duration a)
+        {
+            int totalSeconds = a.Hours * 3600 + ((a.Minutes+1) * 60) + a.Seconds ;
+
+            return new Duration(totalSeconds);
+
+        }
+        public static Duration operator --(Duration a)
+        {
+            int totalSeconds = a.Hours * 3600 + ((a.Minutes - 1) * 60) + a.Seconds;
+
+            return new Duration(totalSeconds);
+        }
+        public static Duration operator -(Duration a, Duration b)
+        {
+            int totalSeconds = (a.Hours-b.Hours) * 3600 + ((a.Minutes - b.Minutes) * 60) + (a.Seconds-b.Seconds);
+
+            return new Duration(totalSeconds);
+
+        }
+        public static bool operator >(Duration a, Duration b)
+        {
+            if ((a.Hours * 3600 + a.Minutes * 60 + a.Seconds) - (b.Hours * 3600 + b.Minutes * 60 + b.Seconds) > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool operator <(Duration a, Duration b)
+        {
+            if ((a.Hours * 3600 + a.Minutes * 60 + a.Seconds) - (b.Hours * 3600 + b.Minutes * 60 + b.Seconds) < 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
